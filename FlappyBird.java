@@ -128,6 +128,12 @@ public class FlappyBird extends JPanel implements ActionListener, KeyListener {
         graphics.drawImage(backgroundImage, 0, 0, boardWidth, boardHeight, null);
         graphics.drawImage(bird.image, bird.x, bird.y, bird.width, bird.height, null);
 
+        
+        graphics.setColor(Color.white);
+        graphics.setFont(new Font("Arial", Font.BOLD, 16));
+        String scoreText = "Score: " + (int) score;
+        graphics.drawString(scoreText, 10, 20);
+
         for(Pipe pipe: pipes){
             graphics.drawImage(pipe.image, pipe.x, pipe.y, pipe.width, pipe.height, null );
         }
@@ -136,15 +142,10 @@ public class FlappyBird extends JPanel implements ActionListener, KeyListener {
             graphics.setColor(Color.RED);
             graphics.setFont(new Font("Arial", Font.BOLD, 24));
             String gameOverText = "Game Over";
-            String scoreText = "Score: " + (int)score;
             
-            // Căn giữa nội dung
             FontMetrics metrics = graphics.getFontMetrics();
-            int xGameOver = (boardWidth - metrics.stringWidth(gameOverText)) / 2;
-            int xScore = (boardWidth - metrics.stringWidth(scoreText)) / 2;
-            
+            int xGameOver = (boardWidth - metrics.stringWidth(gameOverText)) / 2;            
             graphics.drawString(gameOverText, xGameOver, boardHeight / 2 - 20);
-            graphics.drawString(scoreText, xScore, boardHeight / 2 + 20);
         }
         
     }
