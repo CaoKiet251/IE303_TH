@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -62,6 +63,15 @@ public class ProductApp extends Application {
         primaryStage.setTitle("Adidas Shop");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        // Add selection to first product card after scene is shown
+        if (!products.isEmpty()) {
+            Platform.runLater(() -> {
+                root.lookupAll(".product-card").stream()
+                    .findFirst()
+                    .ifPresent(node -> node.getStyleClass().add("product-card-selected"));
+            });
+        }
     }
 
     private VBox createProductDetailsPane() {
@@ -122,7 +132,6 @@ public class ProductApp extends Application {
         products.add(new Product("4DFWD PULSE SHOES", 160.00, "This product is excluded from all promotional discounts and offers.", "/images/img6.png", "Adidas"));
         products.add(new Product("4DFWD PULSE SHOES", 160.00, "This product is excluded from all promotional discounts and offers.", "/images/img1.png", "Adidas"));
         products.add(new Product("FORUM MID SHOES", 100.00, "This product is excluded from all promotional discounts and offers.", "/images/img2.png", "Adidas"));
-        products.add(new Product("SUPERNOVA SHOES", 150.00, "NMD City Stock 2", "/images/img3.png", "Adidas"));
     }
 
     private GridPane createProductGrid() {
